@@ -1,0 +1,21 @@
+# Credentials and secrets: never commit these
+.env
+.env.*
+*.pem
+*.key
+*.p12
+credentials.json
+client_secret*.json
+*service-account*.json
+*-sa.json
+token.json
+google-ads.yaml
+google-ads.yml
+
+# Local tooling
+.venv/
+venv/
+__pycache__/
+.DS_Store
+.idea/
+.vscode/
