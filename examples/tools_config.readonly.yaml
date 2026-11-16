@@ -1,0 +1,16 @@
+# Read only tools config for the Google Ads MCP server.
+#
+# Only needed for server versions newer than commit 2a336aa, which ship
+# write tools (assets, labels) switched on by default. This file turns
+# them off so the server can only read data.
+#
+# Local use: save as tools_config.yaml in the folder you start the server
+# from, or point GOOGLE_ADS_MCP_TOOLS_CONFIG at this file.
+# Cloud Run: copy into the root of your google-ads-mcp clone before building.
+
+namespaces:
+  customers: true
+  search: true
+  metadata: true
+  labels: false
+  assets: false

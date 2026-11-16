@@ -26,4 +26,8 @@ Clicked Create. Google generated a Client ID and Client secret.
 
 ## Notes
 
-Client ID and secret are not stored in this repo, and neither is any personal email or account info. They live only in the Google Cloud console and, once downloaded, in a local credentials file on the machine running the MCP server, excluded from git via .gitignore. If you are following this as a guide, substitute your own email and organization wherever you see a placeholder like <your-email>.
+Copy the Client ID and Client secret somewhere safe for now. You do not need to download the JSON file, step 03 passes both values to the server as environment variables from a local `.env` file.
+
+Client ID and secret are not stored in this repo, and neither is any personal email or account info. They live only in the Google Cloud console and in that local `.env` file, which `.gitignore` keeps out of git. If you are following this as a guide, substitute your own email and organization wherever you see a placeholder like <your-email>.
+
+This Desktop app client is fine for running the server on your own machine. If you later deploy to Cloud Run (step 07), you will need a second client of type Web application. Step 07 explains why.

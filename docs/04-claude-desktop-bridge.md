@@ -22,6 +22,29 @@ Confirmed with node --version and npx --version once the environment was activat
 
 Edited claude_desktop_config.json directly (found at ~/Library/Application Support/Claude/claude_desktop_config.json on Mac) and added an mcpServers entry that points command at the absolute path to npx inside the conda environment, with args running mcp-remote against the local server URL.
 
+This is the final working version, including the two fixes described further down. Replace `<you>` with your Mac username (check with `whoami`). If the file already has other servers in it, add `google-ads-mcp` inside the existing `mcpServers` block rather than pasting a second one.
+
+```json
+{
+  "mcpServers": {
+    "google-ads-mcp": {
+      "command": "/Users/<you>/miniforge3/envs/mcp/bin/npx",
+      "args": ["-y", "mcp-remote", "http://localhost:8080/mcp"],
+      "env": {
+        "PATH": "/Users/<you>/miniforge3/envs/mcp/bin:/usr/local/bin:/usr/bin:/bin"
+      }
+    }
+  }
+}
+```
+
+Notes on the entry:
+
+- `command` must be the full path to npx inside the conda environment, not just `npx`.
+- The `env` PATH line is what lets npx find node. Without it you get the first error below.
+- Use `localhost`, not `127.0.0.1`. That is the second error below.
+- No credentials go in this file. The server already has them from the `.env` file in step 03, and the server from step 03 must be running for this to connect.
+
 Important: any edit to this file only takes effect after a full quit of Claude Desktop (Cmd+Q) and reopen. Closing the window is not enough.
 
 ## What did not work on the first try
@@ -46,4 +69,4 @@ CSRF double submit check failed, possible cross site consent forgery. This came 
 
 After clearing the cached auth state and completing both consent screens quickly in one pass, the browser showed Authorization successful, you may close this window and return to the CLI. Claude Desktop connected successfully. A first query at the manager account level (list of client accounts under the MCC) returned real data.
 
-Client account level queries (an individual client account's own campaigns) still failed at this point with a different error. That is covered in the next doc, 05.
+Client account level queries (an individual client account's own campaigns) still failed at this point with a different error. That is covered in the next doc, [05](05-login-customer-id.md).
